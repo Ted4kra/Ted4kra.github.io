@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Mac系统下使用chmod命令修改文件权限</title>
+  <meta name="description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  <meta name="author" content="leopardpan">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mac系统下使用chmod命令修改文件权限">
+  <meta name="twitter:description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Mac系统下使用chmod命令修改文件权限">
+  <meta property="og:description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="canonical" href="http://localhost:4000/2019/07/chmod/">
+  <link rel="alternate" type="application/rss+xml" title="Ted4kra" href="http://localhost:4000/feed.xml">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+
+<!-- 站点统计 -->
+  <script 
+  async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>  
+
+<!-- 百度统计 -->
+  
+  <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?374eccfe5b7d001b7f2a9d5685dc6683";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+  </script>
+  
+
+<!-- google 统计 -->
+  
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-9005224472374751",
+    enable_page_level_ads: true
+  });
+</script>
+
+</head>
+
+
+  <body>
+
+    <span class="mobile btn-mobile-menu">        
+      <div class="nav_container">
+         <nav class="nav-menu-item" style = "float:right">
+            <i class="nav-menu-item">
+              <a href="/#blog" title="" class="blog-button">  博客主页
+              </a>
+            </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/archive" title="archive" class="btn-mobile-menu__icon">
+                      所有文章
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/tags" title="tags" class="btn-mobile-menu__icon">
+                      标签
+                  </a>
+                </i>
+            
+                <i class="nav-menu-item">
+
+                  <a href="/about" title="about" class="btn-mobile-menu__icon">
+                      关于我
+                  </a>
+                </i>
+            
+          </nav>
+      </div>
+    </span>
+    
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url('/images/background-cover.jpg')">
+  <div class="panel-main">
+
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+        <!-- 头像效果-start -->
+        <div class="ih-item circle effect right_to_left">            
+            <a href="/#blog" title="前往 Ted4kra 的主页" class="blog-button">
+                <div class="img"><img src="/images/avatar.jpg" alt="img"></div>
+                <div class="info">
+                    <div class="info-back">
+                        <h2> 
+                            
+                                ted4kra
+                            
+                        </h2>
+                        <p>
+                           
+                                iOS
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- 头像效果-end -->
+        <h1 class="panel-cover__title panel-title"><a href="/#blog" title="link to homepage for Ted4kra" class="blog-button">Ted4kra</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">个人站</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到我的个人站~</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+        
+        
+
+        <div class="navigation-wrapper">
+          <div>
+            <nav class="cover-navigation cover-navigation--primary">
+              <ul class="navigation">
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">博客主页</a></li>
+                
+                  <li class="navigation__item"><a href="/archive" title="archive">所有文章</a></li>
+                
+                  <li class="navigation__item"><a href="/tags" title="tags">标签</a></li>
+                
+                  <li class="navigation__item"><a href="/about" title="about">关于我</a></li>
+                
+              </ul>
+            </nav>
+          </div>          
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="panel-cover--overlay cover-clear"></div>
+    
+  </div>
+</header>
+
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title">Mac系统下使用chmod命令修改文件权限</h1>
+    <div class="post-meta">
+      <img src="/images/calendar.png" width="20px"/> 
+      <time datetime="2019-07-10 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-07-10</time>  
+         
+      <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
+    </p>
+    </div>
+  </header>
+
+  <section class="post">
+    <p>自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现</p>
+
+<blockquote>
+  <p>-bash: ./build.sh: Permission denied</p>
+</blockquote>
+
+<p>是权限不足导致的。Mac终端修改文件权限使用的是chmod命令。可以直接通过 <strong>man chmod</strong> 在终端工具上查看该命令的帮助手册。</p>
+
+<h2 id="查看文件的权限">查看文件的权限</h2>
+<p><strong>ls -l</strong> 命令可以查看当前目录下所有文件的访问权限，也可以查看指定文件。任意新建一个 <strong>build.sh</strong> 文件，查看该文件的权限：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ ls -l build.sh
+-rw-r--r--  1 jsyl  staff  0  3 14 10:09 build.sh
+
+biubiubiu:~ jsyl$ ls -l /Users/jsyl/Desktop
+total 38976
+drwxr-xr-x@  8 jsyl  staff       272  1 23 12:18 (iOS)S2iCodeModule_v2.4.0
+-rw-r--r--@  1 jsyl  staff    199471  3  9 15:25 5c95d50c5d2c.gif
+drwxr-xr-x  10 jsyl  staff       340  2  1 09:19 视频录制
+</code></pre></div></div>
+
+<p>打印出来的是就是当前文件的信息，如果查看的是文件夹，将输出文件夹下所有文件的信息。
+文件信息含义对应解释如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>-rw-r–r–</th>
+      <th>1</th>
+      <th>jsyl</th>
+      <th>staff</th>
+      <th>0</th>
+      <th>3 14 10:09</th>
+      <th>build.sh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>文件类型和访问权限</td>
+      <td>文件数量</td>
+      <td>所属用户</td>
+      <td>所在群组</td>
+      <td>文件大小</td>
+      <td>修改日期</td>
+      <td>文件名称</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>对 <strong>-rw-r–r–</strong> 的详细说明：</p>
+
+<ol>
+  <li>第一个符号代表文件类型，‘-’ 符号表示该文件为非目录类型，‘d’ 符号表示目录类型；</li>
+  <li>后面9个字母分为三组“rw- r– r–”，每组对应的是所属用户(user)、所属用户所在组(group)、其他用户(other)对该文件的访问权限；每组中的三个字符分别对应用户对该文件用户的权限：可读(read)、可写(write)、可执行(excute);如果应有所有权限就是 <strong>rwx</strong> ；如果没有权限就是用 <strong>-</strong> 表示；</li>
+  <li>有的文件类型后面会多一个<strong>@</strong>，形如<strong>-rwxrwxrwx@</strong>，@符号表示文件拓展属性，属于文件系统的一个功能</li>
+</ol>
+
+<h2 id="修改访问权限">修改访问权限</h2>
+<h3 id="直接修改">直接修改</h3>
+<p>根据上面查看权限的介绍，修改权限也应该包括 访问用户、添加或取消操作、具体权限和访问文件，语法格式：</p>
+<blockquote>
+  <p>chmod [who] [opt] [mode] 文件/目录名 
+chmod 用户+操作+权限 文件</p>
+</blockquote>
+
+<ol>
+  <li>用户 who：使用字母<strong>u</strong>代表拥有者(user)、字母<strong>g</strong>代表拥有者所在群组(group)、字母<strong>o</strong>代表其他用户(other)、字母<strong>a</strong>表示所有用户(all,包含前面的三种用户)</li>
+  <li>操作 opt：“+”表示增加权限，“-”表示取消权限，“=”表示赋值权限，取消原有权限</li>
+  <li>权限 mode：“r” 符号表示可读(read)，“w” 表示可写(write)，“x” 表示可执行权限(execute)</li>
+  <li>文件：如果不指定文件名，表示操作对象为当前目录下的所有文件</li>
+</ol>
+
+<p>以前面buil.sh文件为例，将拥有着所在群组和其他用户改为<strong>可读可写可执行</strong>权限的方式：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod go+rwx build.sh
+biubiubiu:Desktop jsyl$ ls -l build.sh
+-rw-rwxrwx  1 jsyl  staff  0  3 14 10:09 build.sh
+</code></pre></div></div>
+<p>更复杂一点，可以同时添加多种操作，操作之间使用“,”隔开就行
+user拥有所有权限，other没有任何权限，group取消执行权限</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod u+rwx,o-rwx,g-x build.sh
+biubiubiu:Desktop jsyl$ ls -l build.sh
+-rwxrw----  1 jsyl  staff  0  3 14 10:09 build.sh
+</code></pre></div></div>
+
+<h3 id="使用数字修改">使用数字修改</h3>
+<p>更简单的方法：使用数字表示权限部分的读、写、执行权限。
+数字设定的语法格式</p>
+<blockquote>
+  <p>chmod [mode] 文件名</p>
+</blockquote>
+
+<p>这里关键是mode的取值，我们将rwx看成二进制数，如果有则有1表示，没有则有0表示，那么<code class="highlighter-rouge">rwx r-x r--</code>则可以表示成为：</p>
+
+<p><code class="highlighter-rouge">111 101 100</code></p>
+
+<p>再将其每三位转换成为一个十进制数，就是754。 
+可以看出，三个数字从前到后就分别表示u、g、o三种用户的访问权限。</p>
+
+<p>再如我们给build.sh这些权限：</p>
+
+<p>～|自己 | 同组用户 | 其他用户 
+—|—|—|—
+可读 | 是 | 是 | 是 
+可写 | 是 | 是 |  /
+可执行|/|/|/
+那么，我们先根据上表得到权限串为：<strong>rw-rw-r–</strong>，那么转换成二进制数就是110 110 100，再每三位转换成为一个十进制数，就得到664，因此我们执行命令：</p>
+
+<blockquote>
+  <p>chmod 664 build.sh</p>
+</blockquote>
+
+<p>我们也可以通过下面的图来直接看出权限之间的关系 
+数字和权限对应关系如图：</p>
+
+<p><img src="media/15209931960477/1508342093.png" alt="1508342093" /></p>
+
+<p>即：1.可执行，2.可写，4.可读；相交部分就是同时拥有权限。0表示没有权限</p>
+
+<hr />
+<p>例子
+—-</p>
+<ol>
+  <li>修改<strong>所有用户</strong>拥有<strong>读写执行</strong>的所有权限：</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod 777 build.sh
+biubiubiu:Desktop jsyl$ ls -l build.sh
+-rwxrwxrwx  1 jsyl  staff  0  3 14 10:09 build.sh
+</code></pre></div></div>
+<p>====
+2.user拥有所有权限，group没有执行权限，other没有任何权限</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl<span class="nv">$ </span><span class="nb">chmod </span>760 build.sh
+biubiubiu:Desktop jsyl<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> build.sh
+<span class="nt">-rwxrw----</span>  1 jsyl  staff  0  3 14 10:09 build.sh
+</code></pre></div></div>
+
+<p>补充一点，有时候需要递归修改目录文件及其子目录中的文件类型，可以使用 -R 选项。</p>
+
+<p>参考：
+    <a href="http://blog.csdn.net/growing_tree/article/details/78289707">http://blog.csdn.net/growing_tree/article/details/78289707</a>
+    <a href="http://www.7do.net/resources-11706-1-1.html">http://www.7do.net/resources-11706-1-1.html</a></p>
+
+
+
+  </section>
+</article>
+
+<section>
+
+<!--            <div class="content-play">-->
+<!--              <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang" title="打赏，支持一下">打赏一个呗</a></p>-->
+<!--              <div class="hide_box-play"></div>-->
+<!--              <div class="shang_box-play">-->
+<!--                <a class="shang_close-play" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="/images/payimg/close.jpg" alt="取消" /></a>-->
+<!--                <div class="shang_tit-play">-->
+<!--                  <p>感谢您的支持，我会继续努力的!</p>-->
+<!--                </div>-->
+<!--                <div class="shang_payimg">-->
+<!--                    <img src="/images/payimg/alipayimg.jpg" alt="扫码支持" title="扫一扫" />-->
+<!--                </div>-->
+<!--              <div class="shang_payimg">    -->
+<!--                    <img src="/images/payimg/weipayimg.jpg" alt="扫码支持" title="扫一扫" />-->
+<!--                </div>-->
+<!--                <div class="pay_explain">扫码打赏，你说多少就多少</div>-->
+<!--                <div class="shang_payselect">-->
+<!--                  <div class="pay_item checked" data-id="alipay">-->
+<!--                    <span class="pay_logo"><img src="/images/payimg/alipay.jpg" alt="支付宝" /></span>-->
+<!--                  </div>-->
+<!--                  <div class="pay_item" data-id="weipay">-->
+<!--                    <span class="pay_logo"><img src="/images/payimg/wechat.jpg" alt="微信" /></span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="shang_info-play">-->
+<!--                  <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+            <script type="text/javascript">
+            function dashangToggle(){
+              $(".hide_box-play").fadeToggle();
+              $(".shang_box-play").fadeToggle();
+            }
+            </script>
+
+            <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';"></div>
+
+            <style type="text/css">
+              .content-play{width:80%;margin-top: 20px;margin-bottom: 10px;height:40px;}
+              .hide_box-play{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+              .shang_box-play{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+              .shang_box-play img{border:none;border-width:0;}
+              .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+              .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+              .shang_close-play{float:right;display:inline-block;
+                margin-right: 10px;margin-top: 20px;
+              }
+              .shang_logo{display:block;text-align:center;margin:20px auto;}
+              .shang_tit-play{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/images/payimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+              .shang_tit-play p{color:#a3a3a3;text-align:center;font-size:16px;}
+              .shang_payimg{width:140px;padding:10px;padding-left: 80px; /*border:6px solid #EA5F00;**/margin:0 auto;border-radius:3px;height:140px;display:inline-block;}
+              .shang_payimg img{display:inline-block;margin-right:10px;float:left;text-align:center;width:140px;height:140px; }
+              .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+              .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:500px;margin-left:110px;}
+              .shang_payselect .pay_item{display:inline-block;margin-right:140px;float:left;}
+              .shang_info-play{clear:both;}
+              .shang_info-play p,.shang_info-play a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+            </style>
+
+       <ul class="pager">
+        
+        
+    </ul>
+</section>
+
+<section class="post-comments">
+
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80NTIzMy8yMTc0OA==">
+        <script type="text/javascript">
+            (function(d, s) {
+             var j, e = d.getElementsByTagName(s)[0];
+             
+             if (typeof LivereTower === 'function') { return; }
+             
+             j = d.createElement(s);
+             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+             j.async = true;
+             
+             e.parentNode.insertBefore(j, e);
+             })(document, 'script');
+            </script>
+        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+
+</section>
+
+
+            <section class="footer">
+    <footer>
+        <div class = "footer_div">  
+        <nav class="cover-navigation navigation--social">
+          <ul class="navigation">
+
+          
+          <!-- Github -->
+          <li class="navigation__item_social">
+            <a href="https://github.com/Ted4kra" title="@Ted4kra 的 Github" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/github.png);"></div>
+            </a>
+          </li>
+          
+
+          
+
+          
+
+          
+          <!-- Zhihu -->
+          <li class="navigation__item_social">
+            <a href="https://www.jianshu.com/u/ted4kra" title="@ted4kra" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/jianshu.png);"></div>
+            </a>
+          </li>
+
+          
+
+          
+
+          
+          
+
+
+          
+          <!-- Email -->
+          <li class="navigation__item_social">
+            <a href="mailto:ted4kra@163.com" title="Contact me">
+              <div class="footer-social-icon" style="background:url(/images/email.png);"></div>
+            </a>
+          </li>
+          
+          
+          <!-- RSS -->
+          <li class="navigation__item_social">
+            <a href="/feed.xml" rel="author" title="RSS" target="_blank">
+              <div class="footer-social-icon" style="background:url(/images/rss.png);"></div>
+              <span class="label">RSS</span>
+            </a>
+          </li>
+
+          </ul>
+        </nav>
+
+        </div>
+
+        <div class = "footer_div">  
+           <p class="copyright text-muted">
+            Copyright &copy; Ted4kra 2019 Theme by <a href="http://baixin.io/">leopardpan</a> |
+            <iframe
+                style="margin-left: 2px; margin-bottom:-5px;"
+                frameborder="0" scrolling="0" width="91px" height="20px"
+                src="https://ghbtns.com/github-btn.html?user=leopardpan&repo=leopardpan.github.io&type=star&count=true" >
+            </iframe>
+            </p>
+        	<div align="right">
+    			<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+          <!-- 访问统计 -->
+          <span id="busuanzi_container_site_pv">
+            本站总访问量
+            <span id="busuanzi_value_site_pv"></span>次
+          </span>
+
+        </div>
+        <div>
+    </footer>
+</section>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+<script type="text/javascript" src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+  </body>
+
+</html>
