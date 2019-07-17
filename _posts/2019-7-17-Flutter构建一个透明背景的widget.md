@@ -175,7 +175,8 @@ class _FeedBackPageState extends State<FeedBackPage> {
     );
   }
 ```
-这样，点起来看似舒服多了；在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
+这样，点起来看似舒服多了；
+> 在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
 如果你遇到了，可以在最外层添加一层Material，并设置type为MaterialType.transparency,如果没遇见，当我没说..溜了溜了。
 
 ### 4.下一个内容
