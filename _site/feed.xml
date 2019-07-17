@@ -5,9 +5,190 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 11 Jul 2019 09:02:35 +0800</pubDate>
-    <lastBuildDate>Thu, 11 Jul 2019 09:02:35 +0800</lastBuildDate>
+    <pubDate>Thu, 18 Jul 2019 00:10:11 +0800</pubDate>
+    <lastBuildDate>Thu, 18 Jul 2019 00:10:11 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Flutter构建一个透明背景的Widget</title>
+        <description>&lt;p&gt;想做一个如下图这样透明背景的widget，但是正常push出来的，在最根部的Container设置成Colors.transparent,页面也不是透明的。
+本文记录的是造出来这个页面的历程；看代码的直接&lt;a href=&quot;https://github.com/Ted4kra/popupView&quot;&gt;点这里&lt;/a&gt;
+&lt;img src=&quot;/images/popupview/want.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-先展示出来&quot;&gt;1. 先展示出来&lt;/h3&gt;
+&lt;p&gt;经过不懈努力，终于试出来一个方法(真的是试出来的😢😢)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt; showCupertinoModalPopup(
+    context: context, 
+    builder: (_) =&amp;gt; FeedBackPage()
+ );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用这个方法push出来的页面，默认就是透明背景的。当然，这个Cupertino对应的Material方法是：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;showDialog(
+    context: context, 
+    builder: (_) =&amp;gt; FeedBackPage()
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是showDialog比showCupertinoModalPopup出来的页面要低一点,而且showCupertinoModalPopup默认的动画更明显一点(本人太菜，还不会手写动画🌚🌚)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;onPressed: () {
+   showCupertinoModalPopup(context: context, builder: (_) =&amp;gt; FeedBackPage());
+   showDialog(context: context, builder: (_) =&amp;gt; FeedBackPage());
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;/images/popupview/different.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2在show出来的widget上添加东西&quot;&gt;2.在show出来的widget上添加东西&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;class _FeedBackPageState extends State&amp;lt;FeedBackPage&amp;gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Center(
+          child: Text(&quot;这里是文字啊&quot;),
+        ),
+      ),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先把代码写成这个样子，先只是展示一个Text，出来的是这个样子。
+💢💢这什么玩意，我没有对Text进行任何设置，怎么就有样式了。我观望flutter半年的，一般情况下，加上一个Scaffold就能解决问题；结果呢，加上Scaffold之后就不会是透明的了，不信你试试。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/popupview/default.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;先不管这个，直接再添加一个TextField上去：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class _FeedBackPageState extends State&amp;lt;FeedBackPage&amp;gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Column(
+          children: &amp;lt;Widget&amp;gt;[
+            Text(&quot;这里是文字啊&quot;),
+            TextField()
+          ],
+        ),
+      ),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后，em…噩梦👿👿&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/popupview/error.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;按照我开发flutter两周的经验，这个错误还是可以通过加一个Scaffold解决。💢💢
+这时的控制台：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;flutter: The following assertion was thrown building TextField(dirty, state: _TextFieldState#c1f8e):
+flutter: No Material widget found.
+flutter: TextField widgets require a Material widget ancestor.
+flutter: In material design, most widgets are conceptually &quot;printed&quot; on a sheet of material. In Flutter's
+flutter: material library, that material is represented by the Material widget. It is the Material widget
+flutter: that renders ink splashes, for instance. Because of this, many material library widgets require that
+flutter: there be a Material widget in the tree above them.
+flutter: To introduce a Material widget, you can either directly include one, or use a widget that contains
+flutter: Material itself, such as a Card, Dialog, Drawer, or Scaffold.
+flutter: The specific widget that could not find a Material ancestor was:
+flutter:   TextField
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;看了控制台，心情舒爽多了；&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;To introduce a Material widget, you can either directly include one, or use a widget that contains Material itself, such as a Card, Dialog, Drawer, or Scaffold.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这里的such as，除了Scaffold，还是有Card，Dialog，Drawer；很显然，Card很适合我们😄😄(虽然Card可能不是这么用的，但是，反正能这么实现)；于是改代码,顺便调整一个嵌套结构,加了一个close按钮：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;class _FeedBackPageState extends State&amp;lt;FeedBackPage&amp;gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Card(
+          child: Column(
+            children: &amp;lt;Widget&amp;gt;[
+              Text(&quot;这里是文字啊&quot;),
+              TextField(),
+              IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 35,
+                ),
+                onPressed: () =&amp;gt; Navigator.pop(context),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这时候界面是这样的：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/popupview/normal.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯，界面忽然就可爱多了🐶。&lt;/p&gt;
+
+&lt;h3 id=&quot;3下一步以为可以处理细节了&quot;&gt;3.下一步，以为可以处理细节了：&lt;/h3&gt;
+&lt;p&gt;TextField设置多行，此时键盘上默认的是换行，所以加一个失去焦点的方法,同时在最外层套一个GestureDetector&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;class _FeedBackPageState extends State&amp;lt;FeedBackPage&amp;gt; {
+  TextEditingController contentController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: ()=&amp;gt; endEditing(),
+      child: Center(...),
+    );
+  }
+
+  endEditing() {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这时，无意间点了透明的地方，这个玩意自己pop了😭😭。无奈，在最外层又添加了一个全屏的透明的Container：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Dart&quot;&gt;class _FeedBackPageState extends State&amp;lt;FeedBackPage&amp;gt; {
+  TextEditingController contentController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: ()=&amp;gt; endEditing(),
+      child: Container(
+        color: Colors.transparent,
+        child: body(),
+      ),
+    );
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样，点起来看似舒服多了；在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
+如果你遇到了，可以在最外层添加一层Material，并设置type为MaterialType.transparency,如果没遇见，当我没说..溜了溜了。&lt;/p&gt;
+
+&lt;h3 id=&quot;4下一个内容&quot;&gt;4.下一个内容&lt;/h3&gt;
+&lt;p&gt;接下来就是键盘遮挡TextField的问题了，理想状态应该是，键盘弹出来之后，白色的widget是可以上下滑动的，但是没有实现出来🌚🌚；只是加了一个bottom的Margin，让Card在中心靠上的合适位置显示了；等实现了再更新吧。
+最后的效果和&lt;a href=&quot;https://github.com/Ted4kra/popupView&quot;&gt;代码&lt;/a&gt;：
+&lt;img src=&quot;/images/popupview/done.gif&quot; alt=&quot;gif&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 17 Jul 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2019/07/Flutter%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF%E7%9A%84widget/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/07/Flutter%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF%E7%9A%84widget/</guid>
+        
+        <category>flutter，半透明背景</category>
+        
+        
+      </item>
     
       <item>
         <title>Mac系统下使用chmod命令修改文件权限</title>

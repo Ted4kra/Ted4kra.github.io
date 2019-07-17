@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>Mac系统下使用chmod命令修改文件权限</title>
-  <meta name="description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  <title>Flutter构建一个透明背景的Widget</title>
+  <meta name="description" content="想做一个如下图这样透明背景的widget，但是正常push出来的，在最根部的Container设置成Colors.transparent,页面也不是透明的。本文记录的是造出来这个页面的历程；看代码的直接点这里1. 先展示出来经过不懈努力，终于试出来一个方法(真的是试出来的😢😢)：">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Mac系统下使用chmod命令修改文件权限">
-  <meta name="twitter:description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  <meta name="twitter:title" content="Flutter构建一个透明背景的Widget">
+  <meta name="twitter:description" content="想做一个如下图这样透明背景的widget，但是正常push出来的，在最根部的Container设置成Colors.transparent,页面也不是透明的。本文记录的是造出来这个页面的历程；看代码的直接点这里1. 先展示出来经过不懈努力，终于试出来一个方法(真的是试出来的😢😢)：">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Mac系统下使用chmod命令修改文件权限">
-  <meta property="og:description" content="自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现">
+  <meta property="og:title" content="Flutter构建一个透明背景的Widget">
+  <meta property="og:description" content="想做一个如下图这样透明背景的widget，但是正常push出来的，在最根部的Container设置成Colors.transparent,页面也不是透明的。本文记录的是造出来这个页面的历程；看代码的直接点这里1. 先展示出来经过不懈努力，终于试出来一个方法(真的是试出来的😢😢)：">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2019/07/chmod/">
+  <link rel="canonical" href="http://localhost:4000/2019/07/Flutter%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF%E7%9A%84widget/">
   <link rel="alternate" type="application/rss+xml" title="Ted4kra" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -166,10 +166,10 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">Mac系统下使用chmod命令修改文件权限</h1>
+    <h1 class="post-title">Flutter构建一个透明背景的Widget</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2019-07-10 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-07-10</time>  
+      <time datetime="2019-07-17 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2019-07-17</time>  
          
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -177,150 +177,174 @@
   </header>
 
   <section class="post">
-    <p>自动打包的时候，创建的./xcodebuild.sh文件执行的时候出现</p>
+    <p>想做一个如下图这样透明背景的widget，但是正常push出来的，在最根部的Container设置成Colors.transparent,页面也不是透明的。
+本文记录的是造出来这个页面的历程；看代码的直接<a href="https://github.com/Ted4kra/popupView">点这里</a>
+<img src="/images/popupview/want.png" alt="img" /></p>
+<h3 id="1-先展示出来">1. 先展示出来</h3>
+<p>经过不懈努力，终于试出来一个方法(真的是试出来的😢😢)：</p>
 
+<pre><code class="language-Dart"> showCupertinoModalPopup(
+    context: context, 
+    builder: (_) =&gt; FeedBackPage()
+ );
+</code></pre>
+<p>使用这个方法push出来的页面，默认就是透明背景的。当然，这个Cupertino对应的Material方法是：</p>
+<pre><code class="language-Dart">showDialog(
+    context: context, 
+    builder: (_) =&gt; FeedBackPage()
+);
+</code></pre>
+<p>但是showDialog比showCupertinoModalPopup出来的页面要低一点,而且showCupertinoModalPopup默认的动画更明显一点(本人太菜，还不会手写动画🌚🌚)：</p>
+
+<pre><code class="language-Dart">onPressed: () {
+   showCupertinoModalPopup(context: context, builder: (_) =&gt; FeedBackPage());
+   showDialog(context: context, builder: (_) =&gt; FeedBackPage());
+},
+</code></pre>
+<p><img src="/images/popupview/different.png" alt="img" /></p>
+<h3 id="2在show出来的widget上添加东西">2.在show出来的widget上添加东西</h3>
+
+<pre><code class="language-Dart">class _FeedBackPageState extends State&lt;FeedBackPage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Center(
+          child: Text("这里是文字啊"),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<p>首先把代码写成这个样子，先只是展示一个Text，出来的是这个样子。
+💢💢这什么玩意，我没有对Text进行任何设置，怎么就有样式了。我观望flutter半年的，一般情况下，加上一个Scaffold就能解决问题；结果呢，加上Scaffold之后就不会是透明的了，不信你试试。</p>
+
+<p><img src="/images/popupview/default.png" alt="img" /></p>
+
+<p>先不管这个，直接再添加一个TextField上去：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class _FeedBackPageState extends State&lt;FeedBackPage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Column(
+          children: &lt;Widget&gt;[
+            Text("这里是文字啊"),
+            TextField()
+          ],
+        ),
+      ),
+    );
+  }
+}
+</code></pre></div></div>
+
+<p>然后，em…噩梦👿👿</p>
+
+<p><img src="/images/popupview/error.png" alt="img" /></p>
+
+<p>按照我开发flutter两周的经验，这个错误还是可以通过加一个Scaffold解决。💢💢
+这时的控制台：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter: The following assertion was thrown building TextField(dirty, state: _TextFieldState#c1f8e):
+flutter: No Material widget found.
+flutter: TextField widgets require a Material widget ancestor.
+flutter: In material design, most widgets are conceptually "printed" on a sheet of material. In Flutter's
+flutter: material library, that material is represented by the Material widget. It is the Material widget
+flutter: that renders ink splashes, for instance. Because of this, many material library widgets require that
+flutter: there be a Material widget in the tree above them.
+flutter: To introduce a Material widget, you can either directly include one, or use a widget that contains
+flutter: Material itself, such as a Card, Dialog, Drawer, or Scaffold.
+flutter: The specific widget that could not find a Material ancestor was:
+flutter:   TextField
+</code></pre></div></div>
+<p>看了控制台，心情舒爽多了；</p>
 <blockquote>
-  <p>-bash: ./build.sh: Permission denied</p>
+  <p>To introduce a Material widget, you can either directly include one, or use a widget that contains Material itself, such as a Card, Dialog, Drawer, or Scaffold.</p>
 </blockquote>
 
-<p>是权限不足导致的。Mac终端修改文件权限使用的是chmod命令。可以直接通过 <strong>man chmod</strong> 在终端工具上查看该命令的帮助手册。</p>
+<p>这里的such as，除了Scaffold，还是有Card，Dialog，Drawer；很显然，Card很适合我们😄😄(虽然Card可能不是这么用的，但是，反正能这么实现)；于是改代码,顺便调整一个嵌套结构,加了一个close按钮：</p>
+<pre><code class="language-Dart">class _FeedBackPageState extends State&lt;FeedBackPage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        color: Colors.white,
+        width: 300,
+        height: 300,
+        child: Card(
+          child: Column(
+            children: &lt;Widget&gt;[
+              Text("这里是文字啊"),
+              TextField(),
+              IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 35,
+                ),
+                onPressed: () =&gt; Navigator.pop(context),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+</code></pre>
+<p>这时候界面是这样的：</p>
 
-<h2 id="查看文件的权限">查看文件的权限</h2>
-<p><strong>ls -l</strong> 命令可以查看当前目录下所有文件的访问权限，也可以查看指定文件。任意新建一个 <strong>build.sh</strong> 文件，查看该文件的权限：</p>
+<p><img src="/images/popupview/normal.png" alt="img" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ ls -l build.sh
--rw-r--r--  1 jsyl  staff  0  3 14 10:09 build.sh
+<p>嗯，界面忽然就可爱多了🐶。</p>
 
-biubiubiu:~ jsyl$ ls -l /Users/jsyl/Desktop
-total 38976
-drwxr-xr-x@  8 jsyl  staff       272  1 23 12:18 (iOS)S2iCodeModule_v2.4.0
--rw-r--r--@  1 jsyl  staff    199471  3  9 15:25 5c95d50c5d2c.gif
-drwxr-xr-x  10 jsyl  staff       340  2  1 09:19 视频录制
-</code></pre></div></div>
+<h3 id="3下一步以为可以处理细节了">3.下一步，以为可以处理细节了：</h3>
+<p>TextField设置多行，此时键盘上默认的是换行，所以加一个失去焦点的方法,同时在最外层套一个GestureDetector</p>
+<pre><code class="language-Dart">class _FeedBackPageState extends State&lt;FeedBackPage&gt; {
+  TextEditingController contentController = TextEditingController();
 
-<p>打印出来的是就是当前文件的信息，如果查看的是文件夹，将输出文件夹下所有文件的信息。
-文件信息含义对应解释如下：</p>
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: ()=&gt; endEditing(),
+      child: Center(...),
+    );
+  }
 
-<table>
-  <thead>
-    <tr>
-      <th>-rw-r–r–</th>
-      <th>1</th>
-      <th>jsyl</th>
-      <th>staff</th>
-      <th>0</th>
-      <th>3 14 10:09</th>
-      <th>build.sh</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>文件类型和访问权限</td>
-      <td>文件数量</td>
-      <td>所属用户</td>
-      <td>所在群组</td>
-      <td>文件大小</td>
-      <td>修改日期</td>
-      <td>文件名称</td>
-    </tr>
-  </tbody>
-</table>
+  endEditing() {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+}
+</code></pre>
+<p>这时，无意间点了透明的地方，这个玩意自己pop了😭😭。无奈，在最外层又添加了一个全屏的透明的Container：</p>
 
-<p>对 <strong>-rw-r–r–</strong> 的详细说明：</p>
+<pre><code class="language-Dart">class _FeedBackPageState extends State&lt;FeedBackPage&gt; {
+  TextEditingController contentController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: ()=&gt; endEditing(),
+      child: Container(
+        color: Colors.transparent,
+        child: body(),
+      ),
+    );
+  }
+</code></pre>
+<p>这样，点起来看似舒服多了；在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
+如果你遇到了，可以在最外层添加一层Material，并设置type为MaterialType.transparency,如果没遇见，当我没说..溜了溜了。</p>
 
-<ol>
-  <li>第一个符号代表文件类型，‘-’ 符号表示该文件为非目录类型，‘d’ 符号表示目录类型；</li>
-  <li>后面9个字母分为三组“rw- r– r–”，每组对应的是所属用户(user)、所属用户所在组(group)、其他用户(other)对该文件的访问权限；每组中的三个字符分别对应用户对该文件用户的权限：可读(read)、可写(write)、可执行(excute);如果应有所有权限就是 <strong>rwx</strong> ；如果没有权限就是用 <strong>-</strong> 表示；</li>
-  <li>有的文件类型后面会多一个<strong>@</strong>，形如<strong>-rwxrwxrwx@</strong>，@符号表示文件拓展属性，属于文件系统的一个功能</li>
-</ol>
-
-<h2 id="修改访问权限">修改访问权限</h2>
-<h3 id="直接修改">直接修改</h3>
-<p>根据上面查看权限的介绍，修改权限也应该包括 访问用户、添加或取消操作、具体权限和访问文件，语法格式：</p>
-<blockquote>
-  <p>chmod [who] [opt] [mode] 文件/目录名 
-chmod 用户+操作+权限 文件</p>
-</blockquote>
-
-<ol>
-  <li>用户 who：使用字母<strong>u</strong>代表拥有者(user)、字母<strong>g</strong>代表拥有者所在群组(group)、字母<strong>o</strong>代表其他用户(other)、字母<strong>a</strong>表示所有用户(all,包含前面的三种用户)</li>
-  <li>操作 opt：“+”表示增加权限，“-”表示取消权限，“=”表示赋值权限，取消原有权限</li>
-  <li>权限 mode：“r” 符号表示可读(read)，“w” 表示可写(write)，“x” 表示可执行权限(execute)</li>
-  <li>文件：如果不指定文件名，表示操作对象为当前目录下的所有文件</li>
-</ol>
-
-<p>以前面buil.sh文件为例，将拥有着所在群组和其他用户改为<strong>可读可写可执行</strong>权限的方式：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod go+rwx build.sh
-biubiubiu:Desktop jsyl$ ls -l build.sh
--rw-rwxrwx  1 jsyl  staff  0  3 14 10:09 build.sh
-</code></pre></div></div>
-<p>更复杂一点，可以同时添加多种操作，操作之间使用“,”隔开就行
-user拥有所有权限，other没有任何权限，group取消执行权限</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod u+rwx,o-rwx,g-x build.sh
-biubiubiu:Desktop jsyl$ ls -l build.sh
--rwxrw----  1 jsyl  staff  0  3 14 10:09 build.sh
-</code></pre></div></div>
-
-<h3 id="使用数字修改">使用数字修改</h3>
-<p>更简单的方法：使用数字表示权限部分的读、写、执行权限。
-数字设定的语法格式</p>
-<blockquote>
-  <p>chmod [mode] 文件名</p>
-</blockquote>
-
-<p>这里关键是mode的取值，我们将rwx看成二进制数，如果有则有1表示，没有则有0表示，那么<code class="highlighter-rouge">rwx r-x r--</code>则可以表示成为：</p>
-
-<p><code class="highlighter-rouge">111 101 100</code></p>
-
-<p>再将其每三位转换成为一个十进制数，就是754。 
-可以看出，三个数字从前到后就分别表示u、g、o三种用户的访问权限。</p>
-
-<p>再如我们给build.sh这些权限：</p>
-
-<p>～|自己 | 同组用户 | 其他用户 
-—|—|—|—
-可读 | 是 | 是 | 是 
-可写 | 是 | 是 |  /
-可执行|/|/|/
-那么，我们先根据上表得到权限串为：<strong>rw-rw-r–</strong>，那么转换成二进制数就是110 110 100，再每三位转换成为一个十进制数，就得到664，因此我们执行命令：</p>
-
-<blockquote>
-  <p>chmod 664 build.sh</p>
-</blockquote>
-
-<p>我们也可以通过下面的图来直接看出权限之间的关系 
-数字和权限对应关系如图：</p>
-
-<p><img src="media/15209931960477/1508342093.png" alt="1508342093" /></p>
-
-<p>即：1.可执行，2.可写，4.可读；相交部分就是同时拥有权限。0表示没有权限</p>
-
-<hr />
-<p>例子
-—-</p>
-<ol>
-  <li>修改<strong>所有用户</strong>拥有<strong>读写执行</strong>的所有权限：</li>
-</ol>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl$ chmod 777 build.sh
-biubiubiu:Desktop jsyl$ ls -l build.sh
--rwxrwxrwx  1 jsyl  staff  0  3 14 10:09 build.sh
-</code></pre></div></div>
-<p>====
-2.user拥有所有权限，group没有执行权限，other没有任何权限</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>biubiubiu:Desktop jsyl<span class="nv">$ </span><span class="nb">chmod </span>760 build.sh
-biubiubiu:Desktop jsyl<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> build.sh
-<span class="nt">-rwxrw----</span>  1 jsyl  staff  0  3 14 10:09 build.sh
-</code></pre></div></div>
-
-<p>补充一点，有时候需要递归修改目录文件及其子目录中的文件类型，可以使用 -R 选项。</p>
-
-<p>参考：
-    <a href="http://blog.csdn.net/growing_tree/article/details/78289707">http://blog.csdn.net/growing_tree/article/details/78289707</a>
-    <a href="http://www.7do.net/resources-11706-1-1.html">http://www.7do.net/resources-11706-1-1.html</a></p>
+<h3 id="4下一个内容">4.下一个内容</h3>
+<p>接下来就是键盘遮挡TextField的问题了，理想状态应该是，键盘弹出来之后，白色的widget是可以上下滑动的，但是没有实现出来🌚🌚；只是加了一个bottom的Margin，让Card在中心靠上的合适位置显示了；等实现了再更新吧。
+最后的效果和<a href="https://github.com/Ted4kra/popupView">代码</a>：
+<img src="/images/popupview/done.gif" alt="gif" /></p>
 
 
 
@@ -390,11 +414,11 @@ biubiubiu:Desktop jsyl<span class="nv">$ </span><span class="nb">ls</span> <span
 
        <ul class="pager">
         
-        
-        <li class="next">
-            <a href="/2019/07/Flutter%E6%9E%84%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%80%8F%E6%98%8E%E8%83%8C%E6%99%AF%E7%9A%84widget/" data-toggle="tooltip" data-placement="top" title="Flutter构建一个透明背景的Widget">下一篇：  <span>Flutter构建一个透明背景的Widget</span>
+        <li class="previous">
+            <a href="/2019/07/chmod/" data-toggle="tooltip" data-placement="top" title="Mac系统下使用chmod命令修改文件权限">上一篇：  <span>Mac系统下使用chmod命令修改文件权限</span>
             </a>
         </li>
+        
         
     </ul>
 </section>
