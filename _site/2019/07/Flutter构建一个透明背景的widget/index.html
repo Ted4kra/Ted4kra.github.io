@@ -338,8 +338,11 @@ flutter:   TextField
     );
   }
 </code></pre>
-<p>这样，点起来看似舒服多了；在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
+<p>这样，点起来看似舒服多了；</p>
+<blockquote>
+  <p>在公司写的时候，无意间发现，点击屏幕边缘的时候，还是会自动的pop，但是重新写一遍就没了？？？？[黑人问号脸.jpg]
 如果你遇到了，可以在最外层添加一层Material，并设置type为MaterialType.transparency,如果没遇见，当我没说..溜了溜了。</p>
+</blockquote>
 
 <h3 id="4下一个内容">4.下一个内容</h3>
 <p>接下来就是键盘遮挡TextField的问题了，理想状态应该是，键盘弹出来之后，白色的widget是可以上下滑动的，但是没有实现出来🌚🌚；只是加了一个bottom的Margin，让Card在中心靠上的合适位置显示了；等实现了再更新吧。
@@ -425,23 +428,42 @@ flutter:   TextField
 
 <section class="post-comments">
 
-    <!-- 来必力City版安装代码 -->
-    <div id="lv-container" data-id="city" data-uid="MTAyMC80NTIzMy8yMTc0OA==">
-        <script type="text/javascript">
-            (function(d, s) {
-             var j, e = d.getElementsByTagName(s)[0];
-             
-             if (typeof LivereTower === 'function') { return; }
-             
-             j = d.createElement(s);
-             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-             j.async = true;
-             
-             e.parentNode.insertBefore(j, e);
-             })(document, 'script');
+    <!-- Link Gitalk 的支持文件  -->
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+        <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+        <div id="gitalk-container"></div>     <script type="text/javascript">
+            var gitalk = new Gitalk({
+                                    
+                                    // gitalk的主要参数
+                                    clientID: '8427845ce762275c2dcf',
+                                    clientSecret: '267a62a244a0f6f68353093dfd0ff119a0b4a304',
+                                    repo: 'iotalk',
+                                    owner: 'ted4kra',
+                                    admin: ['ted4kra'],
+                                    id:window.location.pathname,
+                                    
+                                    });
+                                    gitalk.render('gitalk-container');
             </script>
-        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-    </div>
+        <!-- Gitalk end -->
+    
+    <!-- 来必力City版安装代码 -->
+<!--    <div id="lv-container" data-id="city" data-uid="MTAyMC80NTIzMy8yMTc0OA==">-->
+<!--        <script type="text/javascript">-->
+<!--            (function(d, s) {-->
+<!--             var j, e = d.getElementsByTagName(s)[0];-->
+<!--             -->
+<!--             if (typeof LivereTower === 'function') { return; }-->
+<!--             -->
+<!--             j = d.createElement(s);-->
+<!--             j.src = 'https://cdn-city.livere.com/js/embed.dist.js';-->
+<!--             j.async = true;-->
+<!--             -->
+<!--             e.parentNode.insertBefore(j, e);-->
+<!--             })(document, 'script');-->
+<!--            </script>-->
+<!--        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>-->
+<!--    </div>-->
     <!-- City版安装代码已完成 -->
 
 </section>
