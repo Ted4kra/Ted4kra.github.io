@@ -5,7 +5,7 @@ title: 关于我
 
 一个 iOS 开发者，喜欢研究一些新技术。
 
-目前在写flutter，swift
+目前写了两周的flutter，swift
 
 <p>
 
