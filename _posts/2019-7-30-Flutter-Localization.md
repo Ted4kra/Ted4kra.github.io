@@ -11,7 +11,7 @@ tag: Flutter，国际化， 插件
 
 搜索 **Flutter i18n** 安装，或者直接搜索Flutter
 
-![屏幕快照 2019-04-02 下午6.12.24.png](https://upload-images.jianshu.io/upload_images/17081109-4faac53ac41ae719.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![17081109-4faac53ac41ae719](media/15644878757036/17081109-4faac53ac41ae719.png)
 
 
 安装完成后， 需要重启。
@@ -19,25 +19,27 @@ tag: Flutter，国际化， 插件
  
  * 会多一个与lib同级的res文件夹，里面自动生成values文件夹，里面有string_en.arb文件。
 
-![屏幕快照 2019-04-02 下午6.23.43.png](https://upload-images.jianshu.io/upload_images/17081109-ab96196f5db616b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![17081109-ab96196f5db616b9](media/15644878757036/17081109-ab96196f5db616b9.png)
 
 
  * 上面会多一个按钮
+![17081109-8cf5df01d7b40207](media/15644878757036/17081109-8cf5df01d7b40207.png)
 
-![屏幕快照 2019-04-02 下午6.25.09.png](https://upload-images.jianshu.io/upload_images/17081109-8cf5df01d7b40207.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 * 默认只添加了英文，可以添加自己需要的arb文件
-![屏幕快照 2019-04-02 下午6.23.53.png](https://upload-images.jianshu.io/upload_images/17081109-2feb7e67405885b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![17081109-2feb7e67405885b1](media/15644878757036/17081109-2feb7e67405885b1.png)
 
 
 * 每次更新arb文件后，会自动生成一个文件，在lib/ganerated/i18n.dart,如果自动生成不成功，点击按钮。
-![屏幕快照 2019-04-02 下午6.28.14.png](https://upload-images.jianshu.io/upload_images/17081109-8b01b08d6b0a57b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![17081109-8b01b08d6b0a57b4](media/15644878757036/17081109-8b01b08d6b0a57b4.png)
+
+
 
 > 注意
 > 1. strings.en.arb不能删除，否则会生成失败....原因不知道
 > 2. 如果点击按钮，直接报错了，报错位置在右下角！！！会有一个红点。检查项目根目录中.idea里是否有misc.xml，如果没有就复制老项目的。然后再生成
+![17081109-5e8cce3ebfba7e8f](media/15644878757036/17081109-5e8cce3ebfba7e8f.png)
 
-![屏幕快照 2019-04-02 下午6.31.08.png](https://upload-images.jianshu.io/upload_images/17081109-5e8cce3ebfba7e8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 ## 2.配置main.dart 
 
 1. 引入import 'generated/i18n.dart';
