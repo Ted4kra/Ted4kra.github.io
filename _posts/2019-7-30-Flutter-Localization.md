@@ -3,8 +3,9 @@
 layout: post
 title: "Flutter国际化-使用flutter_i18n的全流程"
 description: "Flutter国际化方法：使用flutter_i18n插件"
-tag: Flutter，国际化， 插件 
+tag: Flutter,国际化, 插件 
 ---
+
 
 简介： flutter_i18n 有插件，比Intl简单。
 ## 1. 在Android Studio中安装flutter_i18n插件
