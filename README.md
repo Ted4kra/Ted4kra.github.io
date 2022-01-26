@@ -1,4 +1,4 @@
-# [文章地址](https://github.com/Ted4kra/Ted4kra.github.io)
+# [文章地址](https://Ted4kra/Ted4kra.github.io)
 
 
 #### 感谢   
